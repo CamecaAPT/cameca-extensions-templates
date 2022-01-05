@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows7.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<Platforms>x64</Platforms>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Package">
+		<Authors>AuthorName</Authors>
+		<Description>DescriptionContent</Description>
+		<Copyright>Copyright 2022 © AuthorName. All rights reserved.</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup Label="Package Dependencies">
+		<PackageReference Include="Cameca.CustomAnalysis.Interface" Version="0.1.0-alpha.18" />
+	</ItemGroup>
+
+</Project>
