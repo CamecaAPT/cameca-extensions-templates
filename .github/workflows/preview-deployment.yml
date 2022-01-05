@@ -68,7 +68,7 @@ jobs:
       - name: Pack
         run: >
           dotnet pack
-          .\Cameca.Extensions.Template\Cameca.Extensions.Template.csproj
+          .\Cameca.Extensions.Templates\Cameca.Extensions.Templates.csproj
           --no-build
           --configuration $env:BUILD_CONFIGURATION
           /p:Version=$env:GitVersion_SemVer
