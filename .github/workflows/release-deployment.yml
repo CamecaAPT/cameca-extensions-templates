@@ -57,6 +57,9 @@ jobs:
       # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
+
+      - name: Restore template project
+        run: dotnet restore .\Cameca.Extensions.Templates\Cameca.Extensions.Templates.csproj
       
       # Build
       - name: Build
