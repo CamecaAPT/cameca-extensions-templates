@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0-windows7.0</TargetFramework>
+		<TargetFramework>net6.0-windows7.0</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<Platforms>x64</Platforms>
 		<Nullable>enable</Nullable>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<ImplicitUsings>disable</ImplicitUsings>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Package">
@@ -15,7 +16,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Package Dependencies">
-		<PackageReference Include="Cameca.CustomAnalysis.Interface" Version="0.1.0-alpha.18" />
+		<PackageReference Include="Cameca.CustomAnalysis.Utilities" Version="1.1.0-alpha.24" />
 	</ItemGroup>
 
 </Project>

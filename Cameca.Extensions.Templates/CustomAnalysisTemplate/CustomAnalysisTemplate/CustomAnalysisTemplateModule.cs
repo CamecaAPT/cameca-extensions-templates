@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cameca.CustomAnalysis.Interface.CustomAnalysis;
+using Cameca.CustomAnalysis.Interface;
+using Cameca.CustomAnalysis.Utilities;
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace CustomAnalysisTemplate
+namespace CustomAnalysisTemplate;
+
+public class CustomAnalysisTemplateModule : IModule
 {
-    [ModuleDependency("IvasModule")]
-    public class CustomAnalysisTemplateModule : IModule
+    public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any additional dependencies with the Unity IoC container
-        }
+        containerRegistry.AddCustomAnalysisUtilities(options => options.UseStandardBaseClasses = true);
 
-        public void OnInitialized(IContainerProvider containerProvider)
-        {
-            var customAnalysisService = containerProvider.Resolve<ICustomAnalysisService>();
+        containerRegistry.Register<object, CustomAnalysisTemplateNode>(CustomAnalysisTemplateNode.UniqueId);
+        containerRegistry.RegisterInstance(CustomAnalysisTemplateNode.DisplayInfo, CustomAnalysisTemplateNode.UniqueId);
+        containerRegistry.Register<IAnalysisMenuFactory, CustomAnalysisTemplateNodeMenuFactory>(nameof(CustomAnalysisTemplateNodeMenuFactory));
+        containerRegistry.Register<object, CustomAnalysisTemplateViewModel>(CustomAnalysisTemplateViewModel.UniqueId);
+    }
 
-            customAnalysisService.Register<CustomAnalysisTemplateCustomAnalysis, CustomAnalysisTemplateOptions>(
-                new CustomAnalysisDescription("CustomAnalysisTemplate", "AnalysisDisplayName", new Version()));
-        }
+    public void OnInitialized(IContainerProvider containerProvider)
+    {
+        var extensionRegistry = containerProvider.Resolve<IExtensionRegistry>();
+        extensionRegistry.RegisterAnalysisView<CustomAnalysisTemplateView, CustomAnalysisTemplateViewModel>(AnalysisViewLocation.Default);
     }
 }
