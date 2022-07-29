@@ -23,7 +23,7 @@
       "datatype": "choice",
       "choices": [
         {
-          "choice": "net6.0-windows",
+          "choice": "net6.0-windows10.0.17763.0",
           "description": ".NET Windows (net6.0-windows)"
         }
       ],
