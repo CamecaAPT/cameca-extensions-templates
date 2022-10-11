@@ -1,7 +1,6 @@
-# Release Deployment Workflow
-# Prereleases only differ by having a prerelease suffix on the triggering tag
+# Main Branch Deployment Workflow
 
-name: Release Deployment
+name: Main Branch (Tagged Release) Deployment
 
 # Controls when the workflow will run
 on:
@@ -23,6 +22,7 @@ jobs:
     # Job scoped environment variables
     env:
       BUILD_CONFIGURATION: Release
+      BUILD_VERSION: ${{github.ref_name}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -40,26 +40,10 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x
-          
-      # Install GitTools
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.11
-        with:
-          versionSpec: '5.x'
-
-      # Determine SemVer with GitVersion
-      - name: Determine Version
-        id:   gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.11
-        with:
-          useConfigFile: true
 
       # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
-
-      - name: Restore template project
-        run: dotnet restore .\Cameca.Extensions.Templates\Cameca.Extensions.Templates.csproj
       
       # Build
       - name: Build
@@ -67,7 +51,7 @@ jobs:
           dotnet build
           --no-restore
           --configuration $env:BUILD_CONFIGURATION
-          /p:Version=$env:GitVersion_SemVer
+          /p:Version=$env:BUILD_VERSION
           --nologo
       
       # Test (if present)
@@ -83,18 +67,15 @@ jobs:
       - name: Pack
         run: >
           dotnet pack
-          .\Cameca.Extensions.Templates\Cameca.Extensions.Templates.csproj
           --no-build
           --configuration $env:BUILD_CONFIGURATION
-          /p:Version=$env:GitVersion_SemVer
+          --include-symbols
+          /p:Version=$env:BUILD_VERSION
           --output .
 
-      - name: Push (Package)
-        run: >
-          dotnet nuget push
-          *.nupkg
-          --source https://www.myget.org/F/cameca-extensions-dev/api/v2/package 
-          --api-key $env:MYGET_TOKEN
-          --skip-duplicate
-        env:
-          MYGET_TOKEN: ${{ secrets.MYGET_API_KEY }}
+      # Publish artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nupkg
+          path: ./*.nupkg

@@ -28,6 +28,7 @@
 	<ItemGroup Label="Files">
 		<Content Include="**\*" Exclude="**\bin\**\*;**\obj\**\*;**\.vs\**\*;**\*.user" />
 		<Compile Remove="**\*" />
+		<None Remove="CustomAnalysisTemplate\CustomAnalysisTemplate\Properties\launchSettings.json" />
 		<None Include="..\README.md" Pack="true" PackagePath="\" />
 		<None Include="..\Images\Cameca.png" Pack="true" PackagePath="\" />
 	</ItemGroup>

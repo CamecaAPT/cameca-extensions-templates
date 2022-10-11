@@ -10,21 +10,21 @@
       "name": {
         "text": "Description"
       },
-      "isVisible": "true"
+      "isVisible": true
     },
     {
       "id": "AuthorName",
       "name": {
         "text": "Author Name"
       },
-      "isVisible": "true"
+      "isVisible": true
     },
     {
       "id": "AnalysisDisplayName",
       "name": {
         "text": "Display Name"
       },
-      "isVisible": "true"
+      "isVisible": true
     }
   ]
 }
