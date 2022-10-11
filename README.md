@@ -3,7 +3,7 @@
 .NET templates for creating extensions for CAMECA AP Suite
 
 ## How to install
-1. Ensure that the .NET SDK is install (either through Visual Studio Installer or [Microsoft .NET installer website](https://dotnet.microsoft.com/en-us/download/dotnet))
+1. Ensure that the .NET SDK is installed (either through Visual Studio Installer or [Microsoft .NET installer website](https://dotnet.microsoft.com/en-us/download/dotnet))
 2. Run `dotnet new --install Cameca.Extensions.Templates --nuget-source https://www.myget.org/F/cameca-extensions-dev/api/v3/index.json`
 
 ## How to use
