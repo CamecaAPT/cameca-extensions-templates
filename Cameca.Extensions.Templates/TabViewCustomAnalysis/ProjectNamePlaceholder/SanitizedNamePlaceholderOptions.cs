@@ -1,12 +1,13 @@
-﻿using Prism.Mvvm;
+﻿using System.ComponentModel.DataAnnotations;
+using Prism.Mvvm;
 
-namespace CustomAnalysisTemplate;
+namespace ProjectNamePlaceholder;
 
-public class CustomAnalysisTemplateOptions : BindableBase
+public class SanitizedNamePlaceholderOptions : BindableBase
 {
     /* Example of a "Bindable" property. Properties of this form will notify the analysis that they have been changed.
     private int count;
-    [Display(Name = "My Ion Count")]
+    [Display(Name = "Ion Count")]
     // [Display(AutoGenerateField = false)]  // An example of how to hide the property from the property editor
     public int Count
     {

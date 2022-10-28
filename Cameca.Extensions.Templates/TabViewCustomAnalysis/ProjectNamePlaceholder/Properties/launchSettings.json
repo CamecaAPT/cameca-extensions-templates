@@ -5,7 +5,7 @@
       "executablePath": "%PROGRAMFILES%\\CAMECA Instruments\\AP Suite\\Cameca.Shell.Main.exe",
       "workingDirectory": "%PROGRAMFILES%\\CAMECA Instruments\\AP Suite\\"
     },
-    "CustomAnalysisTemplate": {
+    "SanitizedNamePlaceholder": {
       "commandName": "Project"
     }
   }

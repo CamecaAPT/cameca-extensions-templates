@@ -1,16 +1,17 @@
 ﻿using Cameca.CustomAnalysis.Interface;
+using Cameca.CustomAnalysis.Utilities;
 using Cameca.CustomAnalysis.Utilities.Legacy;
 
-namespace CustomAnalysisTemplate;
+namespace ProjectNamePlaceholder;
 
-public class CustomAnalysisTemplateAnalysis : ICustomAnalysis<CustomAnalysisTemplateOptions>
+internal class SanitizedNamePlaceholderAnalysis : ICustomAnalysis<SanitizedNamePlaceholderOptions>
 {
     /* Services defined by the Cameca.CustomAnalysis.Interface APS can be injected into the constructor for later use.
-    private readonly IIsosurfaceAnalysis analysis;
+    private readonly IIsosurfaceAnalysis _isosurfaceAnalysis;
 
-    public CustomAnalysisTemplateAnalysis(IIsosurfaceAnalysis analysis)
+    public SanitizedNamePlaceholderAnalysis(IIsosurfaceAnalysis isosurfaceAnalysis)
     {
-        this.analysis = analysis;
+        _isosurfaceAnalysis = isosurfaceAnalysis;
     }
     //*/
 
@@ -26,7 +27,7 @@ public class CustomAnalysisTemplateAnalysis : ICustomAnalysis<CustomAnalysisTemp
     /// <param name="ionData">Provides access to mass, position, and other ion data.</param>
     /// <param name="options">Configurable options displayed in the property editor.</param>
     /// <param name="viewBuilder">Defines how the result will be represented in AP Suite</param>
-    public void Run(IIonData ionData, CustomAnalysisTemplateOptions options, IViewBuilder viewBuilder)
+    public void Run(IIonData ionData, SanitizedNamePlaceholderOptions options, IViewBuilder viewBuilder)
     {
         // TODO: Add custom analysis logic
     }

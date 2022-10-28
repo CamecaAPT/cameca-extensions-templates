@@ -53,7 +53,6 @@ packages/*
 *.vspscc
 *.vssscc.builds
 *.pidb
-*.log
 *.scc
 *.tlog
 *.exp
