@@ -9,15 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		LICENSE = LICENSE
-		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{19B5291A-1193-43B9-82AF-755A620F6648}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomAnalysisTemplate", "CustomAnalysisTemplate", "{932D7BBA-7876-45E3-8BD8-546108B72ABE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomAnalysisTemplate", "Cameca.Extensions.Templates\CustomAnalysisTemplate\CustomAnalysisTemplate\CustomAnalysisTemplate.csproj", "{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0E6FC0D4-1924-45BE-981D-121113024A95}"
 EndProject
@@ -43,21 +35,11 @@ Global
 		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|x64.ActiveCfg = Release|Any CPU
 		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|x64.Build.0 = Release|Any CPU
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Debug|Any CPU.Build.0 = Debug|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Debug|x64.ActiveCfg = Debug|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Debug|x64.Build.0 = Debug|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Release|Any CPU.ActiveCfg = Release|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Release|Any CPU.Build.0 = Release|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Release|x64.ActiveCfg = Release|x64
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{932D7BBA-7876-45E3-8BD8-546108B72ABE} = {19B5291A-1193-43B9-82AF-755A620F6648}
-		{92A2EDFF-4E45-42D2-B6DF-162BFC3A132A} = {932D7BBA-7876-45E3-8BD8-546108B72ABE}
 		{0E6FC0D4-1924-45BE-981D-121113024A95} = {281A4FE9-4706-41BF-AD69-F5F57FF44528}
 		{C899D88B-5FD8-416C-8361-F3D51E4F9BAB} = {0E6FC0D4-1924-45BE-981D-121113024A95}
 	EndGlobalSection

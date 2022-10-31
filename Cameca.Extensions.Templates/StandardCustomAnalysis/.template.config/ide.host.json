@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json.schemastore.org/vs-2017.3.host",
+  "defaultSymbolVisibility": false,
+  "icon": "icon.png",
+  "order": 0,
+  "symbolInfo": [
+    {
+      "id": "AuthorsPlaceholder",
+      "name": {
+        "text": "Authors"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "DescriptionPlaceholder",
+      "name": {
+        "text": "Description"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "DisplayNamePlaceholder",
+      "name": {
+        "text": "Display Name"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "AddGitHubActions",
+      "name": {
+        "text": "Add GitHub Actions"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "AddReadme",
+      "name": {
+        "text": "Add README"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "AddLicense",
+      "name": {
+        "text": "Add LICENSE"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "AddIcon",
+      "name": {
+        "text": "Add Icon"
+      },
+      "isVisible": true
+    }
+  ]
+}
