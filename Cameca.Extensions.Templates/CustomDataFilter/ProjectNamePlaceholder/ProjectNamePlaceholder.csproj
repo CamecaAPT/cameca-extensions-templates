@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<Platforms>x64</Platforms>
+		<Nullable>enable</Nullable>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+		<SelfContained>false</SelfContained>
+		<AssemblyName>ProjectNamePlaceholder</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Direct Output" Condition="'$(Configuration)' == 'Debug'">
+		<OutputPath>$(LOCALAPPDATA)\CAMECA\AP Suite\Extensions\$(AssemblyName)</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Package">
+		<Title>SanitizedNamePlaceholder</Title>
+		<Authors>AuthorsPlaceholder</Authors>
+		<Description>DescriptionPlaceholder</Description>
+		<Copyright>Copyright © AuthorsPlaceholder YearCopyrightPlaceholder All rights reserved.</Copyright>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!--#if (AddIcon) -->
+		<PackageIcon>icon.png</PackageIcon>
+		<!--#endif -->
+		<!--#if (AddReadme) -->
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<!--#endif -->
+		<!--#if (AddLicense) -->
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<!--#endif -->
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<NuspecFile>SanitizedNamePlaceholder.nuspec</NuspecFile>
+	</PropertyGroup>
+
+	<ItemGroup Label="Package Dependencies">
+		<PackageReference Include="Cameca.CustomAnalysis.Utilities" Version="2.1.0-alpha.8" />
+		<!--#if (AddGitHubActions) -->
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+		<!--#endif -->
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--#if (AddIcon) -->
+		<None Include="..\icon.png" Pack="True" PackagePath="$(PackageIcon)" />
+		<!--#endif -->
+		<!--#if (AddReadme) -->
+		<None Include="..\README.md" Pack="True" PackagePath="$(PackageReadmeFile)" />
+		<!--#endif -->
+		<!--#if (AddLicense) -->
+		<None Include="..\LICENSE" Pack="True" PackagePath="$(PackageLicenseFile)" />
+		<!--#endif -->
+	</ItemGroup>
+
+	<!--#if (AddGitHubActions) -->
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<Deterministic>true</Deterministic>
+	</PropertyGroup>
+
+	<!--#endif -->
+	<!-- Nuspec Initiaization and Configuration -->
+	<Target Name="InitializeStandardNuspecProperties" BeforeTargets="GenerateNuspec" Condition="'$(IsPackable)' == 'true'">
+		<PropertyGroup Condition="'$(NuspecFile)' != '' and '$(NuspecProperties)' == ''">
+			<NuspecProperties>
+				id=$(AssemblyName);
+				version=$(Version);
+				authors=$(Authors);
+				description=$(Description);
+				title=$(Title);
+				copyright=$(Copyright);
+				<!--#if (AddReadme) -->
+				readme=$(PackageReadmeFile);
+				<!--#endif -->
+				<!--#if (AddLicense) -->
+				license=$(PackageLicenseFile);
+				<!--#endif -->
+				<!--#if (AddIcon) -->
+				icon=$(PackageIcon);
+				<!--#endif -->
+				repoType=$(RepositoryType);
+				repoUrl=$(RepositoryUrl);
+				projectUrl=$(RepositoryUrl);
+				repoCommit=$(RepositoryCommit);
+				tfw=$(TargetFramework);
+				outDir=$(MSBuildThisFileDirectory)$(OutputPath)
+			</NuspecProperties>
+		</PropertyGroup>
+	</Target>
+</Project>
