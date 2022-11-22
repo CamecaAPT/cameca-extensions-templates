@@ -13,5 +13,5 @@ internal class SanitizedNamePlaceholderNodeMenuFactory : AnalysisMenuFactoryBase
 
     protected override INodeDisplayInfo DisplayInfo => SanitizedNamePlaceholderNode.DisplayInfo;
     protected override string NodeUniqueId => SanitizedNamePlaceholderNode.UniqueId;
-    public override AnalysisMenuLocation Location { get; } = AnalysisMenuLocation.DataFilter;
+    public override AnalysisMenuLocation Location { get; } = AnalysisMenuLocation.Analysis;
 }
