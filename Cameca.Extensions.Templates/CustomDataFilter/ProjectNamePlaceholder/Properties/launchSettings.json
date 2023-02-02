@@ -2,8 +2,8 @@
   "profiles": {
     "Launch AP Suite": {
       "commandName": "Executable",
-      "executablePath": "%PROGRAMFILES%\\CAMECA Instruments\\AP Suite\\Cameca.Shell.Main.exe",
-      "workingDirectory": "%PROGRAMFILES%\\CAMECA Instruments\\AP Suite\\"
+      "executablePath": "%LOCALAPPDATA%\\Programs\\CAMECA Instruments\\AP Suite\\Cameca.Shell.Main.exe",
+      "workingDirectory": "%LOCALAPPDATA%\\Programs\\CAMECA Instruments\\AP Suite\\"
     },
     "SanitizedNamePlaceholder": {
       "commandName": "Project"
