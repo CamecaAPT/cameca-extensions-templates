@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cameca.Extensions.Templates", "Cameca.Extensions.Templates\Cameca.Extensions.Templates.csproj", "{69DB086F-B783-4E59-9DC5-CCA31553C816}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{281A4FE9-4706-41BF-AD69-F5F57FF44528}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0E6FC0D4-1924-45BE-981D-121113024A95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C899D88B-5FD8-416C-8361-F3D51E4F9BAB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main-deployment.yml = .github\workflows\main-deployment.yml
+		.github\workflows\preview-deployment.yml = .github\workflows\preview-deployment.yml
+		.github\workflows\release-deployment.yml = .github\workflows\release-deployment.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Debug|x64.Build.0 = Debug|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|x64.ActiveCfg = Release|Any CPU
+		{69DB086F-B783-4E59-9DC5-CCA31553C816}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E6FC0D4-1924-45BE-981D-121113024A95} = {281A4FE9-4706-41BF-AD69-F5F57FF44528}
+		{C899D88B-5FD8-416C-8361-F3D51E4F9BAB} = {0E6FC0D4-1924-45BE-981D-121113024A95}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D93F7699-0EF6-4144-B9E9-D6B3BE6B9136}
+	EndGlobalSection
+EndGlobal

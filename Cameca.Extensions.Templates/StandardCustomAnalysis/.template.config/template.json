@@ -1,0 +1,193 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "CAMECA Instruments, Inc.",
+  "classifications": [ "Library" ],
+  "name": "AP Suite Custom Analysis (Standard)",
+  "description": "A custom analysis for CAMECA AP Suite ioncluding standard analysis functionality.",
+  "identity": "Cameca.Extensions.Templates.StandardCustomAnalysis",
+  "shortName": "aps-standard",
+  "defaultName": "CustomAnalysis1",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "ProjectNamePlaceholder",
+  "preferNameDirectory": true,
+  "guids": [
+    "CF69BB74-90A6-41D9-B817-8E423E7F959C",
+    "6C6545D9-3166-47DF-B0EF-34380203C86A"
+  ],
+  "symbols": {
+    "AuthorsPlaceholder": {
+      "datatype": "text",
+      "description": "Project organization/authors. Multiple authors should be comma delimited.",
+      "displayName": "Authors",
+      "replaces": "AuthorsPlaceholder",
+      "type": "parameter"
+    },
+    "DescriptionPlaceholder": {
+      "datatype": "text",
+      "description": "A brief description of the project. Required for standard packaging format.",
+      "displayName": "Description",
+      "replaces": "DescriptionPlaceholder",
+      "type": "parameter"
+    },
+    "DisplayNamePlaceholder": {
+      "datatype": "text",
+      "description": "Display name to be used in AP Suite. If empty, the unique ID will be used.",
+      "displayName": "Display Name",
+      "type": "parameter",
+      "defaultValue": ""
+    },
+    "DisplayNamePlaceholderWithFallback": {
+      "datatype": "text",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "DisplayNamePlaceholder",
+        "fallbackVariableName": "SanitizedNamePlaceholder"
+      },
+      "replaces": "DisplayNamePlaceholder",
+      "type": "generated"
+    },
+    "AddGitHubActions": {
+      "type": "parameter",
+      "displayName": "Add GitHub Actions",
+      "datatype": "bool",
+      "description": "Adds configuration to use GitHub Actions to build and publish the custom analysis.",
+      "defaultValue": "false"
+    },
+    "AddReadme": {
+      "type": "parameter",
+      "displayName": "Add README",
+      "datatype": "bool",
+      "description": "Adds minimal README.md file and includes in bundling configuration.",
+      "defaultValue": "false"
+    },
+    "AddLicense": {
+      "type": "parameter",
+      "displayName": "Add LICENSE",
+      "datatype": "bool",
+      "description": "Adds LICENSE placeholder file and includes in bundling configuration.",
+      "defaultValue": "false"
+    },
+    "AddIcon": {
+      "type": "parameter",
+      "displayName": "Add Icon",
+      "datatype": "bool",
+      "description": "Adds 128x128 empty icon placeholder includes in bundling configuration.",
+      "defaultValue": "false"
+    },
+    "SkipRestore": {
+      "type": "parameter",
+      "displayName": "Skip Restore",
+      "datatype": "bool",
+      "description": "If selected, skips automatic NuGet restore of project dependencies on create.",
+      "defaultValue": "false"
+    },
+    "SanitizedNamePlaceholderFileRename": {
+      "type": "derived",
+      "valueSource": "name",
+      "valueTransform": "RemoveUpToFinalDot",
+      "fileRename": "SanitizedNamePlaceholder",
+      "replaces": "SanitizedNamePlaceholder",
+      "description": "Removes all content up to last dot in name to be used for a sanatized project name"
+    },
+    "YearCopyrightPlaceholder": {
+      "type": "generated",
+      "generator": "now",
+      "replaces": "YearCopyrightPlaceholder",
+      "parameters": {
+        "format": "yyyy"
+      }
+    }
+  },
+  "forms": {
+    "RemoveUpToFinalDot": {
+      "identifier": "replace",
+      "pattern": "^.*\\.(?=[^\\.]+$)",
+      "replacement": ""
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(HostIdentifier == \"dotnetcli\" ||  HostIdentifier == \"dotnetcli-preview\")",
+          "rename": {
+            "ProjectNamePlaceholder.template.sln": "ProjectNamePlaceholder.sln"
+          }
+        },
+        {
+          "condition": "(!AddGitHubActions)",
+          "exclude": [
+            ".github/**/*"
+          ]
+        },
+        {
+          "condition": "(!AddReadme)",
+          "exclude": [
+            "README.md"
+          ]
+        },
+        {
+          "condition": "(!AddLicense)",
+          "exclude": [
+            "LICENSE"
+          ]
+        },
+        {
+          "condition": "(!AddIcon)",
+          "exclude": [
+            "icon.png"
+          ]
+        },
+        {
+          "rename": {
+            "ProjectNamePlaceholder/SanitizedNamePlaceholder.nuspec.xml": "ProjectNamePlaceholder/SanitizedNamePlaceholder.nuspec"
+          }
+        }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholderAnalysis.cs"
+    },
+    {
+      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholderOptions.cs"
+    },
+    {
+      "path": "LICENSE"
+    }
+  ],
+  "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "condition": "(!SkipRestore)",
+      "continueOnError": true,
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore'" }
+      ]
+    },
+    {
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "condition": "(AddLicense)",
+      "description": "Opens LICENSE placeholder document in the editor",
+      "args": {
+        "files": "2"
+      },
+      "manualInstructions": [],
+      "continueOnError": true
+    },
+    {
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "description": "Opens custom analysis documents in the editor",
+      "args": {
+        "files": "0;1"
+      },
+      "manualInstructions": [],
+      "continueOnError": true
+    }
+  ]
+}
