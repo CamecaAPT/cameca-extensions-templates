@@ -22,7 +22,6 @@
       "datatype": "text",
       "description": "Project organization/authors. Multiple authors should be comma delimited.",
       "displayName": "Authors",
-      "isRequired": true,
       "replaces": "AuthorsPlaceholder",
       "type": "parameter"
     },
@@ -30,7 +29,6 @@
       "datatype": "text",
       "description": "A brief description of the project. Required for standard packaging format.",
       "displayName": "Description",
-      "isRequired": true,
       "replaces": "DescriptionPlaceholder",
       "type": "parameter"
     },
