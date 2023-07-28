@@ -4,7 +4,7 @@
 
 ## How to install
 1. Ensure that the .NET SDK is installed (either through Visual Studio Installer or [Microsoft .NET installer website](https://dotnet.microsoft.com/en-us/download/dotnet))
-2. Run `dotnet new --install Cameca.Extensions.Templates --nuget-source https://www.myget.org/F/cameca-extensions-dev/api/v3/index.json`
+2. Run `dotnet new --install Cameca.Extensions.Templates --nuget-source https://pkgs.dev.azure.com/cameca/Extensions/_packaging/extensions-dev/nuget/v3/index.json`
 
 ## How to use
 1. View installed templates with `dotnet new --list`
@@ -18,7 +18,7 @@
 |Templates may or may not be available in the New Project dialog in Visual Studio. Visual Studio 2022 should provide display these templates by default. Visual Studio 2019 may display the templates depending on version, currently selected preview options, and .NET SDK version. If the templates are not available in Visual Studio, extra steps beyond the current scope of these instructions may be necessary to have them appear.|
 
 ## Preview Feed
-To install templates still in development, use `--nuget-source https://www.myget.org/F/cameca-extensions-dev-preview/api/v3/index.json`. Prerelease packages *must* include full version qualification to be installed. (e.g. `dotnet new --install Cameca.Extensions.Templates::0.1.0-alpha.4 --nuget-source https://www.myget.org/F/cameca-extensions-dev-preview/api/v3/index.json`)
+To install templates still in development, use `--nuget-source https://pkgs.dev.azure.com/cameca/Extensions/_packaging/extensions-dev-preview/nuget/v3/index.json`. Prerelease packages *must* include full version qualification to be installed. (e.g. `dotnet new --install Cameca.Extensions.Templates::0.1.0-alpha.4 --nuget-source https://pkgs.dev.azure.com/cameca/Extensions/_packaging/extensions-dev-preview/nuget/v3/index.json`)
 
 |:warning: WARNING |
 |:-----------------|
