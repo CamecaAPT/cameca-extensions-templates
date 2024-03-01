@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Xml.Linq;
 using Cameca.CustomAnalysis.Interface;
 using Cameca.CustomAnalysis.PythonCore;
 using Cameca.CustomAnalysis.Utilities;
@@ -16,7 +15,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Prism.Ioc;
 using Python.Runtime;
-using System.Collections;
 using System.ComponentModel;
 
 namespace ProjectNamePlaceholder.Core;
@@ -26,16 +24,18 @@ namespace ProjectNamePlaceholder.Core;
 [ObservableObject]
 internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
 {
-    private const string EntryModuleName = "entry";
+    // This must be a unique Python module per extension, so using the module name should generally be safe
+    // If there is a conflict with calling a different module, this name can be changed
+    private const string EntryModuleName = "SanitizedNamePlaceholderModule";
     private const string EntryFunctionName = "main";
 
     private readonly IPyExecutor pyExecutor;
     private readonly INodeDataFilterProvider nodeDataFilterProvider;
     private readonly IContainerProvider containerProvider;
 
-    public const string UniqueId = "Cameca.CustomAnalysis.SanitizedNamePlaceholder.SanitizedNamePlaceholderNode";
+    public const string UniqueId = "ProjectNamePlaceholder.Core.SanitizedNamePlaceholderNode";
 
-    public static INodeDisplayInfo DisplayInfo { get; } = new NodeDisplayInfo("OPTICS-APT");
+    public static INodeDisplayInfo DisplayInfo { get; } = new NodeDisplayInfo("DisplayNamePlaceholder");
 
     public AsyncRelayCommand RunScriptCommand { get; }
     public RelayCommand CancelScriptCommand { get; }
@@ -69,7 +69,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
 
     protected override void OnCreated(NodeCreatedEventArgs eventArgs)
     {
-        if (eventArgs is { Trigger: Interface.EventTrigger.Load, Data: { } loadData })
+        if (eventArgs is { Trigger: Cameca.CustomAnalysis.Interface.EventTrigger.Load, Data: { } loadData })
         {
             try
             {

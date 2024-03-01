@@ -20,7 +20,6 @@ public class SanitizedNamePlaceholderModule : IModule
 
         containerRegistry.AddCustomAnalysisUtilities(options => options.UseStandardBaseClasses = true);
 
-        containerRegistry.Register<SanitizedNamePlaceholderAnalysis>();
         containerRegistry.Register<object, SanitizedNamePlaceholderNode>(SanitizedNamePlaceholderNode.UniqueId);
         containerRegistry.RegisterInstance(SanitizedNamePlaceholderNode.DisplayInfo, SanitizedNamePlaceholderNode.UniqueId);
         containerRegistry.Register<IAnalysisMenuFactory, SanitizedNamePlaceholderNodeMenuFactory>(nameof(SanitizedNamePlaceholderNodeMenuFactory));
@@ -30,6 +29,6 @@ public class SanitizedNamePlaceholderModule : IModule
     public void OnInitialized(IContainerProvider containerProvider)
     {
         var extensionRegistry = containerProvider.Resolve<IExtensionRegistry>();
-        extensionRegistry.RegisterAnalysisView<LegacyCustomAnalysisView, SanitizedNamePlaceholderViewModel>(AnalysisViewLocation.Top);
+        extensionRegistry.RegisterAnalysisView<SanitizedNamePlaceholderView, SanitizedNamePlaceholderViewModel>(AnalysisViewLocation.Bottom);
     }
 }
