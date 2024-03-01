@@ -37,6 +37,5 @@
 		<!--#endif -->
 		<file src="$outDir$*" target="lib\$tfw$" />
 		<file src="$outDir$PythonModules\**.*" target="content\PythonModules" />
-		<file src="$outDir$pythonnet\**.*" target="content\pythonnet" />
 	</files>
 </package>
