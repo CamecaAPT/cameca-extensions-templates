@@ -73,12 +73,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="PythonModules\pyapsuite\**\*.py">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Update="environment.yml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
