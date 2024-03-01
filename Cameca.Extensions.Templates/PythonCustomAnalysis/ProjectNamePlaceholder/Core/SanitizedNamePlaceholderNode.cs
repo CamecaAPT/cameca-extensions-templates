@@ -55,7 +55,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
         this.containerProvider = containerProvider;
 
         RunScriptCommand = new AsyncRelayCommand(OnRunScript);
-        CancelScriptCommand = new RelayCommand(RunScriptCommand.Cancel, () => RunScriptCommand.CanBeCanceled);
+        CancelScriptCommand = new RelayCommand(RunScriptCommand.Cancel);
         ClearOutputCommand = new RelayCommand(ClearOutput);
     }
 
