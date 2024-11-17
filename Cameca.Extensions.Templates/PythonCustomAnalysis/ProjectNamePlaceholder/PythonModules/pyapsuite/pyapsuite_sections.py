@@ -28,10 +28,9 @@ class SectionDefinition:
 
 class Section:
     
-    def __init__(self, ion_data, name: str, functions) -> None:
+    def __init__(self, ion_data, name: str) -> None:
         self._ion_data = ion_data
         self._name = name
-        self._functions = functions
 
     @property
     def unit(self) -> str:
@@ -98,7 +97,7 @@ class Section:
             chunk = enumerator.Current
             try:
                 handle = chunk.ReadSectionData[System.Byte](self._name).Pin()
-                pointer = self._functions["ToIntPtr"](handle).ToInt64()
+                pointer = Cameca.CustomAnalysis.PythonCoreLib.Unsafe.ToIntPtr(handle).ToInt64()
                 fill_array(
                     section_data,
                     dtype,
@@ -108,8 +107,7 @@ class Section:
             finally:
                 handle.Dispose()
             chunkOffset += chunk.Length
-        section_data.shape = (row_count, values_per_record)
-        return section_data
+        return section_data.reshape((row_count, values_per_record))
 
     @data.setter
     def data(self, data: np.ndarray) -> None:
@@ -156,10 +154,9 @@ class Sections:
     del from sections dictionary
     """
 
-    def __init__(self, ion_data, services, functions, get_data_section_name, *args, **kwargs):
+    def __init__(self, ion_data, services, get_data_section_name, *args, **kwargs):
         self._ion_data = ion_data
         self._services = services
-        self._functions = functions
         # This is a property of the context, but we want the property so it gets re-resolved on each call
         # We can't just resolve the name as it technically is dynamic (e.g. it changes is save as is called on analysis)
         self._get_data_section_name = get_data_section_name
@@ -264,7 +261,7 @@ class Sections:
                 self._sections.pop(key, None)
 
     def _create_section(self, key):
-        return Section(self._ion_data, key, self._functions)
+        return Section(self._ion_data, key)
 
     def _get_add_available(self) -> list[str]:
         reconSections = self._services["IReconstructionSections"]

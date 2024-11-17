@@ -4,6 +4,7 @@ from .pyapsuite_colors import Color
 from .pyapsuite_models import IonFormula
 import System.Collections.Generic
 import Cameca.CustomAnalysis.Interface
+import Cameca.CustomAnalysis.PythonCoreLib
 
 
 def get_ion_formula(ion_forumla: Cameca.CustomAnalysis.Interface.IonFormula) -> IonFormula:
@@ -15,7 +16,13 @@ def get_color(
     if ion_display_info is None:
         return None
     net_color = ion_display_info.GetColor(ion_forumla)
-    return (net_color.ScR, net_color.ScG, net_color.ScB, net_color.ScA)
+    return get_pyapsuite_color(net_color);
+
+def get_net_color(color: Color) -> System.Windows.Media.Color:
+    return System.Windows.Media.Color.FromScRgb(color[3], color[0], color[1], color[2])
+
+def get_pyapsuite_color(color: System.Windows.Media.Color) -> Color:
+    return (color.ScR, color.ScG, color.ScB, color.ScA)
 
 def create_ion_formula(formula: dict[str, int]) -> Cameca.CustomAnalysis.Interface.IonFormula:
     components = System.Collections.Generic.List[Cameca.CustomAnalysis.Interface.IonFormula.Component]()
@@ -87,3 +94,21 @@ def fill_array(array: np.ndarray, dtype: np.dtype, buffer_length: int, lng_ptr: 
     ptr = (ctype * buffer_length).from_address(lng_ptr)
     buffer_ = np.ctypeslib.as_array(ptr)
     array[chunk_offset:chunk_offset + buffer_length] = buffer_
+
+    
+def fill_array_from_memory(array: np.ndarray, memory):
+    stash_shape = array.shape
+    flattened = array.reshape(-1)
+    dtype=array.dtype
+    try:
+        handle = memory.Pin()
+        pointer = Cameca.CustomAnalysis.PythonCoreLib.Unsafe.ToIntPtr(handle).ToInt64()
+        fill_array(
+            flattened,
+            dtype,
+            flattened.size,
+            pointer,
+            0)
+    finally:
+        handle.Dispose()
+    array = flattened.reshape(stash_shape)

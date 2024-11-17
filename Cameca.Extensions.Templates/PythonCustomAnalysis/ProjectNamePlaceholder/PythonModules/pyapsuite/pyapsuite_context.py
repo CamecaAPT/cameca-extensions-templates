@@ -4,21 +4,25 @@ from .pyapsuite_sections import *
 from .pyapsuite_experiment import *
 from .pyapsuite_elements import *
 from .pyapsuite_errors import *
+from .pyapsuite_chart import *
+from .pyapsuite_grid3d import *
 from .pyapsuite_colors import FALLBACK_COLOR_DEFINITIONS, Color
 import Cameca.CustomAnalysis.Interface as Interface
 
-
 class APSuiteContext:
 	
-    def __init__(self, ion_data: Cameca.CustomAnalysis.Interface.IIonData, services: dict[str, object], functions: dict[str, callable]):
+    def __init__(self, ion_data: Cameca.CustomAnalysis.Interface.IIonData, services: dict[str, object], instance_id: System.Guid):
         # It would be really beneficial to have a way to create instances from raw files that can populate for development puposes
         # A custom IIonData could potentially be create from a file, and most services are optional anyways, so extension should function without
-        # Functions could be compiled into a small referenced class library. The only critical one impossible to replicate is due to unsafe casting
         self._ion_data = ion_data
         self._services = services
-        self._functions = functions
-        self._sections = Sections(self._ion_data, self._services, self._functions, lambda: self.data_section_name)
+        self._instance_id = instance_id
+        self._sections = Sections(self._ion_data, self._services, lambda: self.data_section_name)
         self.experiment = Experiment(self._services["IExperimentInfoResolver"])
+        self.chart = MainChart(self._services["IChart3D"], self._services["IRenderDataFactory"])
+        grid3DData = self._services["IGrid3DData"]
+        grid3DParameters = self._services["IGrid3DParameters"]
+        self.grid3d = Grid3D(grid3DData, grid3DParameters) if grid3DData is not None and grid3DParameters is not None else None
 
     @property
     def elements(self) -> list[Element]:
@@ -90,7 +94,38 @@ class APSuiteContext:
             for ion in self._ion_data.Ions]
 
     @property
+    def ion_ranges(self) -> list[IonRange]:
+        ranges = self._services["IMassSpectrumRangeManager"].GetIonRanges()
+        return [
+            IonRange(
+                r.Name,
+                get_ion_formula(r.Formula),
+                r.Volume,
+                r.Min,
+                r.Max,
+                get_pyapsuite_color(r.Color)
+            )
+            for r in ranges
+        ]
+
+    @ion_ranges.setter
+    def ion_ranges(self, ranges: list[IonRange]) -> None:
+        net_ranges = System.Collections.Generic.List[Cameca.CustomAnalysis.Interface.IonTypeInfoRange]()
+        for r in ranges:
+            net_ranges.Add(Cameca.CustomAnalysis.Interface.IonTypeInfoRange(
+                r.name,
+                create_ion_formula(r.formula),
+                float(r.volume),
+                float(r.min),
+                float(r.max),
+                get_net_color(r.color)
+            ))
+        
+        self._services["IMassSpectrumRangeManager"].SetIonRangesSync(net_ranges)
+
+    @property
     def ranges(self) -> list[IonRanges]:
+        """Deprecated: Use ion_ranges instead. This method does not correctly handle multiple unknown ions and has less functionality"""
         ranges = self._services["IMassSpectrumRangeManager"].GetRanges()
         return [
             IonRanges(
@@ -115,7 +150,6 @@ class APSuiteContext:
             net_ranges.Add(ion_formula, ion_range_def)
         
         self._services["IMassSpectrumRangeManager"].SetRangesSync(net_ranges)
-        # self._functions["SetRanges"](self._services["IMassSpectrumRangeManager"], net_ranges)
     
     @property
     def properties(self) -> typing.Optional[System.Object]:
