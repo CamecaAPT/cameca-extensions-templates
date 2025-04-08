@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<authors>$authors$</authors>
+		<description>$description$</description>
+		<title>$title$</title>
+		<!--#if (AddLicense) -->
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="file">$license$</license>
+		<licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+		<!--#endif -->
+		<!--#if (AddIcon) -->
+		<icon>$icon$</icon>
+		<!--#endif -->
+		<!--#if (AddReadme) -->
+		<readme>$readme$</readme>
+		<!--#endif -->
+		<copyright>$copyright$</copyright>
+		<!-- Uncomment if adding to a public git repository -->
+		<!-- <projectUrl>$projectUrl$</projectUrl> -->
+		<!-- <repository type="$repoType$" url="$repoUrl$" commit="$repoCommit$" /> -->
+		<dependencies>
+			<group targetFramework="$tfw$" />
+		</dependencies>
+	</metadata>
+	<files>
+		<!--#if (AddIcon) -->
+		<file src="..\icon.png" target="icon.png" />
+		<!--#endif -->
+		<!--#if (AddLicense) -->
+		<file src="..\LICENSE" target="LICENSE" />
+		<!--#endif -->
+		<!--#if (AddReadme) -->
+		<file src="..\README.md" target="README.md" />
+		<!--#endif -->
+		<file src="$outDir$*" target="lib\$tfw$" />
+		<file src="$outDir$PythonModules\**.*" target="content\PythonModules" />
+	</files>
+</package>

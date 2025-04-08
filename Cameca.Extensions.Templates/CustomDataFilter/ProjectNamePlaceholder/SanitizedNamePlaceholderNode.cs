@@ -13,7 +13,7 @@ internal class SanitizedNamePlaceholderNode : DataFilterNodeBase
 
     public static INodeDisplayInfo DisplayInfo { get; } = new NodeDisplayInfo("DisplayNamePlaceholder");
 
-    public SanitizedNamePlaceholderNode(IDataFilterNodeBaseServices services) : base(services)
+    public SanitizedNamePlaceholderNode(IDataFilterNodeBaseServices services, ResourceFactory resourceFactory) : base(services, resourceFactory)
     {
     }
 
