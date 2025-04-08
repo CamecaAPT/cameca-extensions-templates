@@ -1,13 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Windows;
-using Cameca.CustomAnalysis.PythonCore;
-using Python.Runtime;
-using Cameca.CustomAnalysis.Utilities;
-using Cameca.CustomAnalysis.Interface;
-using System;
+﻿using Cameca.CustomAnalysis.Utilities;
 
 namespace ProjectNamePlaceholder.Core;
 

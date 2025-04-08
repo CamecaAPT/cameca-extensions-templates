@@ -40,8 +40,8 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Package Dependencies">
-		<PackageReference Include="Cameca.CustomAnalysis.PythonCore" Version="1.5.0-beta.0" />
-		<PackageReference Include="Cameca.CustomAnalysis.Utilities" Version="3.6.0-beta.0" />
+		<PackageReference Include="Cameca.CustomAnalysis.PythonCore" Version="1.6.2" />
+		<PackageReference Include="Cameca.CustomAnalysis.Utilities" Version="3.7.0" />
 		<!--#if (AddGitHubActions) -->
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 		<!--#endif -->
@@ -73,7 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="environment.yml">
+		<None Update="requirements.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

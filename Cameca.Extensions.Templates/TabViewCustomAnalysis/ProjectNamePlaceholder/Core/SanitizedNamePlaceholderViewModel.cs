@@ -5,7 +5,7 @@ using Cameca.CustomAnalysis.Utilities.Legacy;
 namespace ProjectNamePlaceholder.Core;
 
 internal class SanitizedNamePlaceholderViewModel
-    : LegacyCustomAnalysisViewModelBase<SanitizedNamePlaceholderNode, SanitizedNamePlaceholderAnalysis, SanitizedNamePlaceholderOptions>
+    : LegacyCustomAnalysisViewModelBase<SanitizedNamePlaceholderNode, SanitizedNamePlaceholderAnalysis, SanitizedNamePlaceholderProperties>
 {
     public const string UniqueId = "ProjectNamePlaceholder.SanitizedNamePlaceholderViewModel";
 

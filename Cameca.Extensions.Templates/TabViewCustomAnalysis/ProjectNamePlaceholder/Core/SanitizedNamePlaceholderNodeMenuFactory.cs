@@ -1,5 +1,4 @@
 ﻿using Cameca.CustomAnalysis.Interface;
-using Cameca.CustomAnalysis.Utilities;
 using Cameca.CustomAnalysis.Utilities.Legacy;
 using Prism.Events;
 using Prism.Services.Dialogs;

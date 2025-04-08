@@ -3,8 +3,6 @@ using Cameca.CustomAnalysis.Utilities;
 using Cameca.CustomAnalysis.PythonCore;
 using Prism.Ioc;
 using Prism.Modularity;
-using System.Reflection;
-using System.IO;
 
 namespace ProjectNamePlaceholder.Core;
 
@@ -15,8 +13,7 @@ public class SanitizedNamePlaceholderModule : IModule
 {
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        var envFilePath = Path.Join(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "environment.yml");
-        containerRegistry.RegisterAnacondaDistribution(envFilePath: envFilePath, fallbackToBase: true);
+        containerRegistry.RegisterPythonDistribution();
 
         containerRegistry.AddCustomAnalysisUtilities(options => options.UseStandardBaseClasses = true);
 
@@ -30,5 +27,7 @@ public class SanitizedNamePlaceholderModule : IModule
     {
         var extensionRegistry = containerProvider.Resolve<IExtensionRegistry>();
         extensionRegistry.RegisterAnalysisView<SanitizedNamePlaceholderView, SanitizedNamePlaceholderViewModel>(AnalysisViewLocation.Bottom);
+
+        containerProvider.InitializePythonDistribution("DisplayNamePlaceholder");
     }
 }

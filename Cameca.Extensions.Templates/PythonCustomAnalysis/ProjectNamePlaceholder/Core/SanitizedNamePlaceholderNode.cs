@@ -11,7 +11,6 @@ using System.Windows;
 using Cameca.CustomAnalysis.Interface;
 using Cameca.CustomAnalysis.PythonCore;
 using Cameca.CustomAnalysis.Utilities;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Prism.Ioc;
 using Python.Runtime;
@@ -21,8 +20,7 @@ namespace ProjectNamePlaceholder.Core;
 
 [DefaultView(SanitizedNamePlaceholderViewModel.UniqueId, typeof(SanitizedNamePlaceholderViewModel))]
 [NodeType(NodeType.DataFilter)]
-[ObservableObject]
-internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
+internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase<SanitizedNamePlaceholderProperties>
 {
     // This must be a unique Python module per extension, so using the module name should generally be safe
     // If there is a conflict with calling a different module, this name can be changed
@@ -48,7 +46,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
         set => SetProperty(ref isClearOnRun, value);
     }
 
-    public SanitizedNamePlaceholderNode(IPyExecutor pyExecutor, IContainerProvider containerProvider, IStandardAnalysisNodeBaseServices services, INodeDataFilterProvider nodeDataFilterProvider) : base(services)
+    public SanitizedNamePlaceholderNode(IPyExecutor pyExecutor, IContainerProvider containerProvider, IStandardAnalysisNodeBaseServices services, INodeDataFilterProvider nodeDataFilterProvider, ResourceFactory resourceFactory) : base(services, resourceFactory)
     {
         this.pyExecutor = pyExecutor;
         this.nodeDataFilterProvider = nodeDataFilterProvider;
@@ -61,7 +59,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
 
     protected override void OnAdded(NodeAddedEventArgs eventArgs)
     {
-        if (nodeDataFilterProvider.Resolve(InstanceId) is { } nodeDataFilter)
+        if (nodeDataFilterProvider.Resolve(Id) is { } nodeDataFilter)
         {
             nodeDataFilter.FilterDelegate = FilterDelegate;
         }
@@ -186,7 +184,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
         IIonData? ionData;
         try
         {
-            ionData = await Services.IonDataProvider.GetOwnerIonData(InstanceId, cancellationToken: token);
+            ionData = await Services.IonDataProvider.GetOwnerIonData(Id, cancellationToken: token);
             if (ionData is null)
             {
                 return;
@@ -202,7 +200,7 @@ internal partial class SanitizedNamePlaceholderNode : StandardAnalysisNodeBase
         var context = new APSuiteContextProvider(
             ionData,
             containerProvider,
-            InstanceId);
+            Id);
         var entryFunction = new EntryFunctionDefinition(new[]
             {
                 new ParameterDefinition("context", context),
