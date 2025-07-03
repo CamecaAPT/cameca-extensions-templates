@@ -163,6 +163,9 @@
     {
       "path": "LICENSE",
       "condition": "(!AddLicense)"
+    },
+    {
+      "path": "ProjectNamePlaceholder/ProjectNamePlaceholder.csproj"
     }
   ],
   "postActions": [
