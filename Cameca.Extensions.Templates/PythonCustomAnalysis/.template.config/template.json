@@ -18,6 +18,10 @@
     "6C6545D9-3166-47DF-B0EF-34380203C86A"
   ],
   "symbols": {
+    "HostIdentifier": {
+      "type": "bind",
+      "binding": "HostIdentifier"
+    },
     "AuthorsPlaceholder": {
       "datatype": "text",
       "description": "Project organization/authors. Multiple authors should be comma delimited.",
@@ -151,13 +155,17 @@
   ],
   "primaryOutputs": [
     {
-      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholderAnalysis.cs"
+      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholder.cs"
     },
     {
-      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholderOptions.cs"
+      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholderProperties.cs"
     },
     {
-      "path": "LICENSE"
+      "path": "LICENSE",
+      "condition": "(!AddLicense)"
+    },
+    {
+      "path": "ProjectNamePlaceholder/ProjectNamePlaceholder.csproj"
     }
   ],
   "postActions": [
@@ -168,11 +176,14 @@
       "description": "Restore NuGet packages required by this project.",
       "manualInstructions": [
         { "text": "Run 'dotnet restore'" }
-      ]
+      ],
+      "args": {
+        "files": [ "ProjectNamePlaceholder/ProjectNamePlaceholder.csproj" ]
+      }
     },
     {
       "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
-      "condition": "(AddLicense)",
+      "condition": "((HostIdentifier != \"dotnetcli\") && (AddLicense))",
       "description": "Opens LICENSE placeholder document in the editor",
       "args": {
         "files": "2"
@@ -183,6 +194,7 @@
     {
       "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
       "description": "Opens custom analysis documents in the editor",
+      "condition": "(HostIdentifier != \"dotnetcli\")",
       "args": {
         "files": "0;1"
       },

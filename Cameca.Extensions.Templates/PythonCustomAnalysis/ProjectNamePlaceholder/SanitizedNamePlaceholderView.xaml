@@ -1,26 +1,27 @@
-﻿<UserControl x:Class="ProjectNamePlaceholder.Core.SanitizedNamePlaceholderView"
+﻿<UserControl x:Class="ProjectNamePlaceholder.SanitizedNamePlaceholderView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:ProjectNamePlaceholder.Core.Controls"
-             xmlns:local="clr-namespace:ProjectNamePlaceholder.Core"
-             d:DataContext="{d:DesignInstance Type={x:Type local:SanitizedNamePlaceholderViewModel}}"
+             xmlns:controls="clr-namespace:Cameca.CustomAnalysis.Utilities.Controls;assembly=Cameca.CustomAnalysis.Utilities"
+             xmlns:local="clr-namespace:ProjectNamePlaceholder"
+             DataContext="{Binding Node}"
+             d:DataContext="{d:DesignInstance Type={x:Type local:SanitizedNamePlaceholder}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button Content="Run" Command="{Binding NodeProxy.RunScriptCommand}" />
-                <Button Content="Cancel" Command="{Binding NodeProxy.CancelScriptCommand}" />
-                <CheckBox Content="Auto Clear" IsChecked="{Binding NodeProxy.IsClearOnRun}" />
+                <Button Content="Run" Command="{Binding UpdateCommand}" />
+                <Button Content="Cancel" Command="{Binding UpdateCancelCommand}" />
+                <CheckBox Content="Auto Clear" IsChecked="{Binding ClearOnRun}" />
             </ToolBar>
         </ToolBarTray>
         <controls:AppendingTextBox AppendScrollBehavior="FollowBottom"
                                    IsReadOnly="True"
                                    Background="Transparent"
                                    FontFamily="Consolas"
-                                   ItemsSource="{Binding NodeProxy.OutputItems}"
+                                   ItemsSource="{Binding OutputItems}"
                                    VerticalScrollBarVisibility="Auto"
                                    TextWrapping="WrapWithOverflow" />
     </DockPanel>
