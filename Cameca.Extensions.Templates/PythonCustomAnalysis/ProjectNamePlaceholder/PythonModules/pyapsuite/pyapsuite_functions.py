@@ -12,10 +12,10 @@ def get_ion_formula(ion_forumla: Cameca.CustomAnalysis.Interface.IonFormula) -> 
 
 def get_color(
         ion_display_info: Cameca.CustomAnalysis.Interface.IIonDisplayInfo,
-        ion_forumla: Cameca.CustomAnalysis.Interface.IonFormula) -> typing.Optional[Color]:
+        ion_type_info: Cameca.CustomAnalysis.Interface.IIonTypeInfo) -> typing.Optional[Color]:
     if ion_display_info is None:
         return None
-    net_color = ion_display_info.GetColor(ion_forumla)
+    net_color = ion_display_info.GetColor(ion_type_info)
     return get_pyapsuite_color(net_color);
 
 def get_net_color(color: Color) -> System.Windows.Media.Color:

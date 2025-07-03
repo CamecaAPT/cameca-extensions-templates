@@ -2,11 +2,9 @@
 
 namespace ProjectNamePlaceholder.Core;
 
-internal class SanitizedNamePlaceholderViewModel : AnalysisViewModelBase<SanitizedNamePlaceholderNode>
+internal class SanitizedNamePlaceholderViewModel : AnalysisViewModelBase<SanitizedNamePlaceholder>
 {
     public const string UniqueId = "Cameca.CustomAnalysis.SanitizedNamePlaceholder.Core.SanitizedNamePlaceholderViewModel";
-
-    public SanitizedNamePlaceholderNode NodeProxy => Node;
 
     public SanitizedNamePlaceholderViewModel(IAnalysisViewModelBaseServices services) : base(services)
     {

@@ -8,10 +8,11 @@ from .pyapsuite_chart import *
 from .pyapsuite_grid3d import *
 from .pyapsuite_colors import FALLBACK_COLOR_DEFINITIONS, Color
 import Cameca.CustomAnalysis.Interface as Interface
+import Cameca.CustomAnalysis.Utilities as Utilities
 
 class APSuiteContext:
 	
-    def __init__(self, ion_data: Cameca.CustomAnalysis.Interface.IIonData, services: dict[str, object], instance_id: System.Guid):
+    def __init__(self, ion_data: Interface.IIonData, services: dict[str, object], instance_id: System.Guid, resources: Utilities.IResources):
         # It would be really beneficial to have a way to create instances from raw files that can populate for development puposes
         # A custom IIonData could potentially be create from a file, and most services are optional anyways, so extension should function without
         self._ion_data = ion_data
@@ -20,6 +21,7 @@ class APSuiteContext:
         self._sections = Sections(self._ion_data, self._services, lambda: self.data_section_name)
         self.experiment = Experiment(self._services["IExperimentInfoResolver"])
         self.chart = MainChart(self._services["IChart3D"], self._services["IRenderDataFactory"])
+        self.resources = resources
         grid3DData = self._services["IGrid3DData"]
         grid3DParameters = self._services["IGrid3DParameters"]
         self.grid3d = Grid3D(grid3DData, grid3DParameters) if grid3DData is not None and grid3DParameters is not None else None
@@ -72,14 +74,14 @@ class APSuiteContext:
     
     @property
     def colors(self) -> list[Color]:
-        ranges = self._services["IMassSpectrumRangeManager"].GetRanges()
+        ion_infos = [ion_info for ion_info in self._ion_data.Ions]
         ion_display_info = self._services["IIonDisplayInfo"]
         if ion_display_info is None:
             return [
                 FALLBACK_COLOR_DEFINITIONS[i % len(FALLBACK_COLOR_DEFINITIONS)]
-                for i in range(len(ranges))
+                for i in range(len(ion_infos))
             ]
-        return [get_color(ion_display_info, x.Key) for x in ranges]
+        return [get_color(ion_display_info, x) for x in ion_infos]
     
     @property
     def ions(self) -> list[IonInfo]:

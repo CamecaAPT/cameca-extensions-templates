@@ -17,8 +17,8 @@ public class SanitizedNamePlaceholderModule : IModule
 
         containerRegistry.AddCustomAnalysisUtilities(options => options.UseStandardBaseClasses = true);
 
-        containerRegistry.Register<object, SanitizedNamePlaceholderNode>(SanitizedNamePlaceholderNode.UniqueId);
-        containerRegistry.RegisterInstance(SanitizedNamePlaceholderNode.DisplayInfo, SanitizedNamePlaceholderNode.UniqueId);
+        containerRegistry.Register<object, SanitizedNamePlaceholder>(SanitizedNamePlaceholder.UniqueId);
+        containerRegistry.RegisterInstance(SanitizedNamePlaceholder.DisplayInfo, SanitizedNamePlaceholder.UniqueId);
         containerRegistry.Register<IAnalysisMenuFactory, SanitizedNamePlaceholderNodeMenuFactory>(nameof(SanitizedNamePlaceholderNodeMenuFactory));
         containerRegistry.Register<object, SanitizedNamePlaceholderViewModel>(SanitizedNamePlaceholderViewModel.UniqueId);
     }
@@ -28,6 +28,6 @@ public class SanitizedNamePlaceholderModule : IModule
         var extensionRegistry = containerProvider.Resolve<IExtensionRegistry>();
         extensionRegistry.RegisterAnalysisView<SanitizedNamePlaceholderView, SanitizedNamePlaceholderViewModel>(AnalysisViewLocation.Bottom);
 
-        containerProvider.InitializePythonDistribution("DisplayNamePlaceholder");
+        containerProvider.InitializePythonDistribution("DisplayNamePlaceholder - Python Options");
     }
 }
