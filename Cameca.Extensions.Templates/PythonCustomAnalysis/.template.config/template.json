@@ -18,6 +18,10 @@
     "6C6545D9-3166-47DF-B0EF-34380203C86A"
   ],
   "symbols": {
+    "HostIdentifier": {
+      "type": "bind",
+      "binding": "HostIdentifier"
+    },
     "AuthorsPlaceholder": {
       "datatype": "text",
       "description": "Project organization/authors. Multiple authors should be comma delimited.",
