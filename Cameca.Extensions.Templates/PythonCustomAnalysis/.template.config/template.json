@@ -163,9 +163,6 @@
     {
       "path": "LICENSE",
       "condition": "(!AddLicense)"
-    },
-    {
-      "path": "ProjectNamePlaceholder/SanitizedNamePlaceholder.csproj"
     }
   ],
   "postActions": [
@@ -178,7 +175,7 @@
         { "text": "Run 'dotnet restore'" }
       ],
       "args": {
-        "files": "3"
+        "files": [ "ProjectNamePlaceholder/SanitizedNamePlaceholder.csproj" ]
       }
     },
     {
