@@ -178,7 +178,7 @@
         { "text": "Run 'dotnet restore'" }
       ],
       "args": {
-        "files": [ "ProjectNamePlaceholder/ProjectNamePlaceholder.csproj" ]
+        "files": "3"
       }
     },
     {
